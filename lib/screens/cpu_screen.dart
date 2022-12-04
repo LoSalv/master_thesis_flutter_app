@@ -1,12 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:battery_plus/battery_plus.dart';
-
-import 'package:battery_info/battery_info_plugin.dart';
-import 'package:battery_info/enums/charging_status.dart';
-import 'package:battery_info/model/android_battery_info.dart';
-import 'package:battery_info/model/iso_battery_info.dart';
 
 class CPUScreen extends StatefulWidget {
   static String id = 'cpu_screen';
@@ -17,53 +11,54 @@ class CPUScreen extends StatefulWidget {
 }
 
 class _CPUScreenState extends State<CPUScreen> {
-  List<String> texts = ["Ciao"];
-  @override
-  void initState() {
-    super.initState();
-    runTask();
-  }
+  List<String> texts = [];
 
-  void runTask() async {
+  void runMultipleTask() {
     setState(() {
       addText("Starting calculations...");
     });
-    DateTime startDate = DateTime.now();
-    // var battery = Battery();
-    // int startBatteryLevel = await battery.batteryLevel;
 
-    num result = 0;
+    for (int j = 0; j < 10; j++) {
+      DateTime startDate = DateTime.now();
+      num result = 0;
 
-    for (var i = pow(11, 7); i >= 0; i--) {
-      result += atan(i) * tan(i);
+      for (var i = pow(15, 7); i >= 0; i--) {
+        result += atan(i) * tan(i);
+      }
+
+      DateTime endDate = DateTime.now();
+
+      Duration delta = endDate.difference(startDate);
+      setState(() {
+        addText("Duration: " + delta.toString());
+      });
     }
-
-    // int endBatteryLevel = await battery.batteryLevel;
-
-    DateTime endDate = DateTime.now();
-    print(
-        "Battery Health: ${(await BatteryInfoPlugin().androidBatteryInfo)?.health}");
-    print(
-        "Current Now: ${(await BatteryInfoPlugin().androidBatteryInfo)?.currentNow}");
-    print(
-        "Battery Capacity: ${(await BatteryInfoPlugin().androidBatteryInfo)?.batteryCapacity}");
-    print(
-        "Battery Level: ${(await BatteryInfoPlugin().androidBatteryInfo)?.batteryLevel}");
-    print(
-        "Remaining Energy: ${(await BatteryInfoPlugin().androidBatteryInfo)?.remainingEnergy}");
-    print("Scale: ${(await BatteryInfoPlugin().androidBatteryInfo)?.scale}");
-    print(
-        "Voltage: ${(await BatteryInfoPlugin().androidBatteryInfo)?.voltage}");
-
-    Duration delta = endDate.difference(startDate);
     setState(() {
-      // addText("Battery level at start: " + startBatteryLevel.toString());
-      // addText("Battery level at end: " + endBatteryLevel.toString());
-      // addText(
-      //     "Battery Delta: " + (endBatteryLevel - startBatteryLevel).toString());
-      addText("Duration: " + delta.toString());
+      addText("End");
     });
-    return;
+  }
+
+  void runTask() {
+    setState(() {
+      addText("Starting calculations...");
+    });
+
+    for (int j = 0; j < 1; j++) {
+      DateTime startDate = DateTime.now();
+      num result = 0;
+
+      for (var i = pow(20, 7); i >= 0; i--) {
+        result += atan(i) * tan(i);
+      }
+
+      DateTime endDate = DateTime.now();
+
+      int delta = endDate.difference(startDate).inSeconds;
+      setState(() {
+        addText("Duration: " + delta.toString());
+        addText("Result: " + result.toString());
+      });
+    }
   }
 
   void addText(String string) {
@@ -78,11 +73,35 @@ class _CPUScreenState extends State<CPUScreen> {
         appBar: AppBar(
           title: const Text("CPU"),
         ),
-        body: ListView.builder(
-          itemCount: texts.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Text(texts[index].toString());
-          },
+        body: Column(
+          children: [
+            TextButton(
+              onPressed: () {
+                runTask();
+              },
+              style: TextButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+              child: const Text("Run Task"),
+            ),
+            TextButton(
+              onPressed: () {
+                runMultipleTask();
+              },
+              style: TextButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+              child: const Text("Run Task x 10"),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: texts.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Text(texts[index].toString());
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
