@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:master_thesis_flutter_app/screens/cpu_screen.dart';
-import 'package:master_thesis_flutter_app/screens/gui_screen.dart';
+import 'package:master_thesis_flutter_app/screens/ui_screen.dart';
+
+import 'accelerometer_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static String id = 'home_screen';
@@ -37,13 +39,25 @@ class HomeScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(
                       context,
-                      GUIScreen.id,
+                      UIScreen.id,
                     );
                   },
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  child: const Center(child: Text("GUI")),
+                  child: const Center(child: Text("UI")),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      AccelerometerScreen.id,
+                    );
+                  },
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 20),
+                  ),
+                  child: const Center(child: Text("Accelerometer")),
                 ),
               ],
             )));
