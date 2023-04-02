@@ -1,0 +1,25 @@
+Start charge counter: 4386000
+End charge counter: 4342000
+Delta charge counter: -44000
+
+Start battery temperature: 228
+End battery temperature: 242
+Delta battery temperature: 14
+
+Duration: 490
+
+CPU
+Max: 5.5
+Min: 0.0
+Std: 1.2557227486638403
+Average: 1.4740306122448978
+MEM
+Max: 5.7
+Min: 2.5
+Std: 0.546148568668568
+Average: 4.738163265306127
+RSS
+Max: 318.0
+Min: 143.0
+Std: 30.29977814443255
+Average: 266.4551020408163
